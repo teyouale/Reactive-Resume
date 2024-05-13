@@ -87,20 +87,20 @@ export const Sidebar = ({ setOpen }: SidebarProps) => {
       shortcut: "⇧R",
       icon: <ReadCvLogo />,
     },
-    {
-      path: "/dashboard/settings",
-      name: t`Settings`,
-      shortcut: "⇧S",
-      icon: <FadersHorizontal />,
-    },
+    // {
+    //   path: "/dashboard/settings",
+    //   name: t`Settings`,
+    //   shortcut: "⇧S",
+    //   icon: <FadersHorizontal />,
+    // },
   ];
 
   return (
     <div className="flex h-full flex-col gap-y-4">
       <div className="ml-12 flex justify-center lg:ml-0">
-        <Button asChild size="icon" variant="ghost" className="size-10 p-0">
+        <Button asChild size="icon" variant="ghost" className="size-32 p-0">
           <Link to="/">
-            <Icon size={24} className="mx-auto hidden lg:block" />
+            <Icon size={600} className="mx-auto hidden lg:block" />
           </Link>
         </Button>
       </div>
@@ -124,7 +124,7 @@ export const Sidebar = ({ setOpen }: SidebarProps) => {
         </Button>
       </UserOptions>
 
-      <Copyright className="ml-2" />
+      {/* <Copyright className="ml-2" /> */}
     </div>
   );
 };

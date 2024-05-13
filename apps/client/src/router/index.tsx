@@ -26,7 +26,13 @@ import { authLoader } from "./loaders/auth";
 export const routes = createRoutesFromElements(
   <Route element={<Providers />}>
     <Route element={<HomeLayout />}>
-      <Route path="/" element={<HomePage />} />
+        <Route element={<AuthLayout />}>
+        <Route element={<GuestGuard />}>
+          <Route path="/" element={<LoginPage />} />
+        </Route>
+        </Route>
+
+      {/* <Route path="/" element={<HomePage />} /> */}
 
       <Route path="meta">
         <Route path="privacy-policy" element={<PrivacyPolicyPage />} />

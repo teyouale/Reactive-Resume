@@ -21,7 +21,7 @@ export const Footer = () => (
           {t`A free and open-source resume builder that simplifies the process of creating, updating, and sharing your resume.`}
         </p>
 
-        <Copyright className="mt-6" />
+        {/* <Copyright className="mt-6" /> */}
       </div>
 
       <div className="relative col-start-4 flex flex-col items-end justify-end">

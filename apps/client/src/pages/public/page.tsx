@@ -86,7 +86,7 @@ export const PublicResumePage = () => {
         />
       </div>
 
-      <div className="flex justify-center py-10 opacity-50 print:hidden">
+      {/* <div className="flex justify-center py-10 opacity-50 print:hidden">
         <Link to="/">
           <Button size="sm" variant="ghost" className="space-x-1.5 text-xs font-normal">
             <span>{t`Built with`}</span>
@@ -94,7 +94,7 @@ export const PublicResumePage = () => {
             <span>{t`Reactive Resume`}</span>
           </Button>
         </Link>
-      </div>
+      </div> */}
 
       <div className="fixed bottom-5 right-5 print:hidden">
         <div className="flex items-center gap-x-4">

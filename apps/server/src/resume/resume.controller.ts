@@ -52,6 +52,24 @@ export class ResumeController {
     }
   }
 
+  @Post('guest')
+  async guest_resume(@Body() createResumeDto: CreateResumeDto) {
+    try {
+      const user_id = 'clwnzxoqo0000ztyob1bumhbg'
+      return await this.resumeService.create(user_id, createResumeDto);
+    } catch (error) {
+      if (error instanceof PrismaClientKnownRequestError && error.code === "P2002") {
+        throw new BadRequestException(ErrorMessage.ResumeSlugAlreadyExists);
+      }
+
+      Logger.error(error);
+      throw new InternalServerErrorException(error);
+    }
+  }
+
+
+
+
   @Post("import")
   @UseGuards(TwoFactorGuard)
   async import(@User() user: UserEntity, @Body() importResumeDto: ImportResumeDto) {

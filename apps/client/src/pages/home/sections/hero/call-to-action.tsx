@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 import { useLogout } from "@/client/services/auth";
 import { useAuthStore } from "@/client/stores/auth";
+import { CreateResumeListItem } from "../../components/create-item";
 
 export const HeroCTA = () => {
   const { logout } = useLogout();
@@ -29,7 +30,10 @@ export const HeroCTA = () => {
   return (
     <>
       <Button asChild size="lg">
-        <Link to="/auth/login">{t`Get Started`}</Link>
+        {/* <Link to="/auth/login">{t`Get Started`}</Link>
+         */}
+        <CreateResumeListItem />
+        
       </Button>
 
       <Button asChild size="lg" variant="link">

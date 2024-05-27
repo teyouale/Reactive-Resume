@@ -74,15 +74,15 @@ export const LeftSidebar = () => {
             }}
           />
           <SectionIcon
-            id="experience"
-            onClick={() => {
-              scrollIntoView("#experience");
-            }}
-          />
-          <SectionIcon
             id="education"
             onClick={() => {
               scrollIntoView("#education");
+            }}
+          />
+          <SectionIcon
+            id="experience"
+            onClick={() => {
+              scrollIntoView("#experience");
             }}
           />
           <SectionIcon
@@ -172,16 +172,16 @@ export const LeftSidebar = () => {
             description={(item) => item.username}
           />
           <Separator />
+           <SectionBase<Education>
+            id="education"
+            title={(item) => item.institution}
+            description={(item) => item.area}
+          />
+          <Separator />
           <SectionBase<Experience>
             id="experience"
             title={(item) => item.company}
             description={(item) => item.position}
-          />
-          <Separator />
-          <SectionBase<Education>
-            id="education"
-            title={(item) => item.institution}
-            description={(item) => item.area}
           />
           <Separator />
           <SectionBase<Skill>

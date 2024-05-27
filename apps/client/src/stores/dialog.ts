@@ -3,7 +3,7 @@ import { create } from "zustand";
 
 export type DialogName = "resume" | "lock" | "import" | "two-factor" | SectionKey;
 
-export type DialogMode = "create" | "update" | "duplicate" | "delete";
+export type DialogMode = "create" | "update" | "duplicate" | "delete" | "guest";
 
 export type DialogPayload<T = unknown> = {
   id: DialogName;
@@ -37,7 +37,7 @@ export const useDialog = <T = unknown>(name: DialogName) => {
     return state.dialog?.name === name ? state.dialog : null;
   });
 
-  return {
+  return { 
     isOpen: !!dialog,
     mode: dialog?.mode,
     payload: dialog?.payload as DialogPayload<T>,

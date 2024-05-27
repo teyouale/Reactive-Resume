@@ -41,6 +41,7 @@ import { z } from "zod";
 import { useCreateResume, useDeleteResume, useUpdateResume } from "@/client/services/resume";
 import { useImportResume } from "@/client/services/resume/import";
 import { useDialog } from "@/client/stores/dialog";
+import { useCreateGuestResume } from "@/client/services/resume/guest";
 
 const formSchema = createResumeSchema.extend({ id: idSchema.optional() });
 
@@ -49,12 +50,15 @@ type FormValues = z.infer<typeof formSchema>;
 export const ResumeDialog = () => {
   const { isOpen, mode, payload, close } = useDialog<ResumeDto>("resume");
 
-  const isCreate = mode === "create";
+  const isCreate = mode === "create" || "guest";
   const isUpdate = mode === "update";
   const isDelete = mode === "delete";
   const isDuplicate = mode === "duplicate";
+  const isGuest = mode === "guest";
+
 
   const { createResume, loading: createLoading } = useCreateResume();
+  const { createGuestResume, loading: createGuestLoading } = useCreateGuestResume();
   const { updateResume, loading: updateLoading } = useUpdateResume();
   const { deleteResume, loading: deleteLoading } = useDeleteResume();
   const { importResume: duplicateResume, loading: duplicateLoading } = useImportResume();
@@ -76,7 +80,10 @@ export const ResumeDialog = () => {
   }, [form.watch("title")]);
 
   const onSubmit = async (values: FormValues) => {
-    if (isCreate) {
+
+    if (isGuest){
+      await createGuestResume({ slug: values.slug, title: values.title, visibility: "public" });
+    }else if (isCreate) {
       await createResume({ slug: values.slug, title: values.title, visibility: "private" });
     }
 

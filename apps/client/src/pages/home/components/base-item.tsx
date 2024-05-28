@@ -12,7 +12,7 @@ type Props = {
 export const BaseListItem = ({ title, description, start, end, className, onClick }: Props) => (
   <div
     className={cn(
-      "flex cursor-pointer items-center rounded p-4 transition-colors hover:bg-secondary/30",
+      "flex cursor-pointer items-center  rounded p-4 transition-colors hover:bg-secondary/30",
       className,
     )}
     onClick={onClick}
@@ -24,7 +24,7 @@ export const BaseListItem = ({ title, description, start, end, className, onClic
         <p className="hidden text-xs opacity-75 sm:block">{description}</p>
       </div>
 
-      {end && <div className="flex size-5 items-center justify-center">{end}</div>}
+      {/* {end && <div className="flex size-5 items-center justify-center">{end}</div>} */}
     </div>
   </div>
 );

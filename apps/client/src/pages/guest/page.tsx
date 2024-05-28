@@ -5,11 +5,11 @@ import { Helmet } from "react-helmet-async";
 import { LoaderFunction, redirect } from "react-router-dom";
 
 import { queryClient } from "@/client/libs/query-client";
-import { findResumeById } from "@/client/services/resume";
+import { findGuestResumeById, findResumeById } from "@/client/services/resume";
 import { useBuilderStore } from "@/client/stores/builder";
 import { useResumeStore } from "@/client/stores/resume";
 
-export const BuilderPage = () => {
+export const GuestBuilderPage = () => {
   const frameRef = useBuilderStore((state) => state.frame.ref);
   const setFrameRef = useBuilderStore((state) => state.frame.setRef);
 
@@ -40,7 +40,7 @@ export const BuilderPage = () => {
     <>
       <Helmet>
         <title>
-          {title} - {t`Reactive Resume`}
+          {title} - {t`AWAQ Resume`}
         </title>
       </Helmet>
 
@@ -55,23 +55,22 @@ export const BuilderPage = () => {
   );
 };
 
-export const builderLoader: LoaderFunction<ResumeDto> = async ({ params }) => {
+export const GuestbuilderLoader: LoaderFunction<ResumeDto> = async ({ params }) => {
   try {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const id = params.id!;
 
     const resume = await queryClient.fetchQuery({
       queryKey: ["resume", { id }],
-      queryFn: () => findResumeById({ id }),
+      queryFn: () => findGuestResumeById({ id }),
     });
 
     useResumeStore.setState({ resume });
     useResumeStore.temporal.getState().clear();
 
     return resume;
-  } catch(e) {
+  } catch {
     console.log('Error')
-    console.log(e)
-    // return redirect("/dashboard");
+    // return redirect("/");
   }
 };

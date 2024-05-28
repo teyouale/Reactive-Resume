@@ -3,6 +3,7 @@ import { t } from "@lingui/macro";
 import { CaretDown, Flask, MagicWand, Plus } from "@phosphor-icons/react";
 import { createResumeSchema, ResumeDto } from "@reactive-resume/dto";
 import { idSchema, sampleResume } from "@reactive-resume/schema";
+import { redirect } from "react-router-dom";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -63,7 +64,7 @@ export const ResumeDialog = () => {
   const { deleteResume, loading: deleteLoading } = useDeleteResume();
   const { importResume: duplicateResume, loading: duplicateLoading } = useImportResume();
 
-  const loading = createLoading || updateLoading || deleteLoading || duplicateLoading;
+  const loading = createLoading || updateLoading || deleteLoading || duplicateLoading || createGuestLoading;
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -245,28 +246,12 @@ export const ResumeDialog = () => {
                 <Button
                   type="submit"
                   disabled={loading}
-                  className={cn(isCreate && "rounded-r-none")}
+                  className={cn(isCreate  && "rounded-r-none")}
                 >
                   {isCreate && t`Create`}
                   {isUpdate && t`Save Changes`}
                   {isDuplicate && t`Duplicate`}
                 </Button>
-
-                {isCreate && (
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button type="button" size="icon" className="rounded-l-none border-l">
-                        <CaretDown />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent side="right" align="center">
-                      <DropdownMenuItem onClick={onCreateSample}>
-                        <Flask className="mr-2" />
-                        {t`Create Sample Resume`}
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                )}
               </div>
             </DialogFooter>
           </form>

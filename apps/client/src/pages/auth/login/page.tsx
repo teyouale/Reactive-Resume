@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { t, Trans } from "@lingui/macro";
 import { ArrowRight } from "@phosphor-icons/react";
-import { loginSchema } from "@reactive-resume/dto";
+import { loginSchema, ResumeDto } from "@reactive-resume/dto";
 import { usePasswordToggle } from "@reactive-resume/hooks";
 import {
   Button,
@@ -14,8 +14,8 @@ import {
   FormMessage,
   Input,
 } from "@reactive-resume/ui";
-import { cn } from "@reactive-resume/utils";
-import { useRef } from "react";
+import { cn, sortByDate } from "@reactive-resume/utils";
+import { useEffect, useRef } from "react";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
@@ -23,12 +23,35 @@ import { z } from "zod";
 
 import { useLogin } from "@/client/services/auth";
 import { useAuthProviders } from "@/client/services/auth/providers";
+import { CreateResumeListItem } from "../../home/components/create-item";
+import { useResumes } from "@/client/services/resume";
+import { BaseListItem } from "../../dashboard/resumes/_layouts/list/_components/base-item";
+import { AnimatePresence, motion } from "framer-motion";
+import { ResumeListItem } from "../../home/components/resume-item";
+import { useCachedResumes } from "@/client/services/resume/guest";
+import { queryClient } from "@/client/libs/query-client";
 
 type FormValues = z.infer<typeof loginSchema>;
 
 export const LoginPage = () => {
   const { login, loading } = useLogin();
+  // const cachedResumes = useCachedResumes();
+  const { resumes, loading:resumesLoading } = useResumes();
 
+
+//  useEffect(() => {
+//     if (cachedResumes && resumes) {
+//       console.log("Cached Resumes:", cachedResumes);
+//       console.log("API Resumes:", resumes);
+
+//       // Update queryClient with cached resumes
+//       cachedResumes.forEach((resume) => {
+//         queryClient.setQueryData<ResumeDto>(["resume", { id: resume.id }], resume);
+//       });
+//     }
+//   }, [cachedResumes, resumes]); 
+  
+    
   const { providers } = useAuthProviders();
   const emailAuthDisabled = !providers?.includes("email");
 
@@ -120,6 +143,35 @@ export const LoginPage = () => {
                 <Link to="/auth/forgot-password">{t`Forgot Password?`}</Link>
               </Button>
             </div>
+        <CreateResumeListItem />
+        {resumesLoading &&
+        Array.from({ length: 4 }).map((_, i) => (
+          <div
+            key={i}
+            className="duration-300 animate-in fade-in"
+            style={{ animationFillMode: "backwards", animationDelay: `${i * 300}ms` }}
+          >
+            <BaseListItem className="bg-secondary/40" />
+          </div>
+        ))}
+
+      {resumes && (
+        <AnimatePresence>
+          {resumes
+            .sort((a, b) => sortByDate(a, b, "updatedAt"))
+            .map((resume, index) => (
+              <motion.div
+                key={resume.id}
+                initial={{ opacity: 0, y: -50 }}
+                animate={{ opacity: 1, y: 0, transition: { delay: (index + 2) * 0.1 } }}
+                exit={{ opacity: 0, filter: "blur(8px)", transition: { duration: 0.5 } }}
+              >
+                <ResumeListItem resume={resume} />
+              </motion.div>
+            ))}
+        </AnimatePresence>
+      )}
+
           </form>
         </Form>
       </div>

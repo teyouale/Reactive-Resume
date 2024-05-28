@@ -18,7 +18,7 @@ export const useCreateGuestResume = () => {
   const {
     error,
     isPending: loading,
-    mutateAsync: createResumeFn,
+    mutateAsync: createGuestResumeFn,
   } = useMutation({
     mutationFn: createGuestResume,
     onSuccess: (data) => {
@@ -28,8 +28,28 @@ export const useCreateGuestResume = () => {
         if (!cache) return [data];
         return [...cache, data];
       });
+
+      // localStorage.setItem(`resume_${data.id}`, JSON.stringify(data));
     },
   });
 
-  return { createGuestResume: createResumeFn, loading, error };
+  return { createGuestResume: createGuestResumeFn, loading, error };
 };
+
+export const useCachedResumes = (): ResumeDto[] | undefined => {
+  // const resumeKeys = Object.keys(localStorage).filter((key) =>
+  //   key.startsWith("resume_")
+  // );
+  //  const cachedResumes = resumeKeys.map((key) =>
+  //   JSON.parse(localStorage.getItem(key) || "")
+  // );
+
+  // console.log("Cached Resumes:", cachedResumes);
+
+
+
+  // return cachedResumes.length > 0 ? cachedResumes : undefined;
+  return undefined;
+};
+
+

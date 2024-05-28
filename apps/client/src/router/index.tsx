@@ -22,6 +22,8 @@ import { Providers } from "../providers";
 import { AuthGuard } from "./guards/auth";
 import { GuestGuard } from "./guards/guest";
 import { authLoader } from "./loaders/auth";
+import { GuestbuilderLoader, GuestBuilderPage } from "../pages/guest/page";
+import { GuestBuilderLayout } from "../pages/guest/layout";
 
 export const routes = createRoutesFromElements(
   <Route element={<Providers />}>
@@ -88,6 +90,15 @@ export const routes = createRoutesFromElements(
     </Route>
 
     {/* Public Routes */}
+
+     <Route path="guest">
+        <Route element={<GuestBuilderLayout />}>
+          <Route path=":id" loader={GuestbuilderLoader} element={<GuestBuilderPage />} />
+
+          {/* <Route index element={<Navigate replace to="/dashboard/resumes" />} /> */}
+        </Route>
+    </Route>
+
     <Route path=":username">
       <Route path=":slug" loader={publicLoader} element={<PublicResumePage />} />
     </Route>

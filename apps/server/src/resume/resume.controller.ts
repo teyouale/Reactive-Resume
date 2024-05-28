@@ -67,6 +67,12 @@ export class ResumeController {
     }
   }
 
+  @Get("/guest/:id")
+  findGuestOne(@Param("id") id: string) {
+    const user_id = 'clwnzxoqo0000ztyob1bumhbg'
+    return this.resumeService.findOne(id,user_id);
+  }
+
 
 
 
@@ -91,11 +97,11 @@ export class ResumeController {
     return this.resumeService.findAll(user.id);
   }
 
-  @Get(":id")
-  @UseGuards(TwoFactorGuard, ResumeGuard)
-  findOne(@Resume() resume: ResumeDto) {
-    return resume;
-  }
+  // @Get(":id")
+  // @UseGuards(TwoFactorGuard, ResumeGuard)
+  // findOne(@Resume() resume: ResumeDto) {
+  //   return resume;
+  // }
 
   @Get(":id/statistics")
   @UseGuards(TwoFactorGuard)

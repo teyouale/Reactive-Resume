@@ -32,7 +32,6 @@ export const HeroCTA = () => {
       <Button asChild size="lg">
         {/* <Link to="/auth/login">{t`Get Started`}</Link>
          */}
-        <CreateResumeListItem />
         
       </Button>
 

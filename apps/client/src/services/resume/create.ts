@@ -30,6 +30,5 @@ export const useCreateResume = () => {
       });
     },
   });
-
   return { createResume: createResumeFn, loading, error };
 };

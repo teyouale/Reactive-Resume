@@ -7,6 +7,7 @@ import { BaseCard } from "./_components/base-card";
 import { CreateResumeCard } from "./_components/create-card";
 import { ImportResumeCard } from "./_components/import-card";
 import { ResumeCard } from "./_components/resume-card";
+import { useEffect } from "react";
 
 export const GridView = () => {
   const { resumes, loading } = useResumes();

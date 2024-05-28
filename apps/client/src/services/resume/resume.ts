@@ -7,6 +7,11 @@ export const findResumeById = async (data: { id: string }) => {
 
   return response.data;
 };
+export const findGuestResumeById = async (data: { id: string }) => {
+  const response = await axios.get<ResumeDto>(`/resume/guest/${data.id}`);
+
+  return response.data;
+};
 
 export const findResumeByUsernameSlug = async (data: { username: string; slug: string }) => {
   const response = await axios.get<ResumeDto>(`/resume/public/${data.username}/${data.slug}`);

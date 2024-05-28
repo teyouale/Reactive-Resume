@@ -1,7 +1,6 @@
 import { t } from "@lingui/macro";
 import { Plus } from "@phosphor-icons/react";
 import { ResumeDto } from "@reactive-resume/dto";
-import { KeyboardShortcut } from "@reactive-resume/ui";
 
 import { useDialog } from "@/client/stores/dialog";
 
@@ -17,15 +16,11 @@ export const CreateResumeListItem = () => {
         <>
           <span>{t`Create a new resume`}</span>
           {/* eslint-disable-next-line lingui/no-unlocalized-strings */}
-          <KeyboardShortcut className="ml-2">^N</KeyboardShortcut>
         </>
       }
-      description={t`Start building from scratch`}
-      onClick={() => {
-        const response = open('guest')
-        console.log(response)
-        return response
-      }}
+      description={t`Try it without signing in"`}
+      onClick={async() => (await open('guest'))}
+      
     />
   );
 };

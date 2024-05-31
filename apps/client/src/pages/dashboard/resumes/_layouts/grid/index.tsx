@@ -22,7 +22,7 @@ export const GridView = () => {
         initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: 1, x: 0, transition: { delay: 0.1 } }}
       >
-        <ImportResumeCard />
+        {/* <ImportResumeCard /> */}
       </motion.div>
 
       {loading &&

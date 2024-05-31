@@ -19,7 +19,7 @@ const DonateCard = () => (
       <CardDescription className="space-y-2">
         <Trans>
           <p>
-            I built Reactive Resume mostly by myself during my spare time, with a lot of help from
+            I built AWAQI Resume mostly by myself during my spare time, with a lot of help from
             other great open-source contributors.
           </p>
           <p>

@@ -64,10 +64,10 @@ export const AuthLayout = () => {
           height={1080}
           alt="Open books on a table"
           className="h-screen w-full object-cover object-center"
-          src="/backgrounds/patrick-tomasso-Oaqk7qqNh_c-unsplash.jpg"
+          src="/backgrounds/main.jpg"
         />
 
-        <div className="absolute bottom-5 right-5 z-10 bg-primary/30 px-4 py-2 text-xs font-medium text-primary-foreground backdrop-blur-sm">
+        {/* <div className="absolute bottom-5 right-5 z-10 bg-primary/30 px-4 py-2 text-xs font-medium text-primary-foreground backdrop-blur-sm">
           <a
             target="_blank"
             rel="noopener noreferrer nofollow"
@@ -75,7 +75,7 @@ export const AuthLayout = () => {
           >
             {t`Photograph by Patrick Tomasso`}
           </a>
-        </div>
+        </div> */}
       </div>
     </div>
   );

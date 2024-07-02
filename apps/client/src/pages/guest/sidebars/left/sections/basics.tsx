@@ -12,7 +12,6 @@ import { URLInput } from "./shared/url-input";
 export const BasicsSection = () => {
   const setValue = useResumeStore((state) => state.setValue);
   const basics = useResumeStore((state) => state.resume.data.basics);
-  console.log(basics.n)
   return (
     <section id="basics" className="grid gap-y-6">
       <header className="flex items-center justify-between">
@@ -31,7 +30,7 @@ export const BasicsSection = () => {
           <Label htmlFor="basics.name">{t`Full Name`}</Label>
           <Input
             id="basics.name"
-            value={basics.name === "guest" ? null : basics.name}
+            value={basics.name === "guest" ? undefined : basics.name}
             hasError={!basicsSchema.pick({ name: true }).safeParse({ name: basics.name }).success}
             onChange={(event) => {
               setValue("basics.name", event.target.value);
@@ -55,7 +54,7 @@ export const BasicsSection = () => {
           <Input
             id="basics.email"
             placeholder="john.doe@example.com"
-            value={basics.email === "admin@guest.com" ? null : basics.email}
+            value={basics.email === "admin@guest.com" ? undefined : basics.email}
             hasError={
               !basicsSchema.pick({ email: true }).safeParse({ email: basics.email }).success
             }

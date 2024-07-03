@@ -70,6 +70,13 @@ export class ResumeService {
 
     return this.prisma.resume.findUniqueOrThrow({ where: { id } });
   }
+  async getUserIdByEmail(email: string) {
+    const user = await this.prisma.user.findUnique({
+      where: { email },
+      select: { id: true },
+    });
+    return user?.id || "null";
+  }
 
   async findOneStatistics(id: string) {
     const result = await this.prisma.statistics.findFirst({

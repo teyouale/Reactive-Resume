@@ -26,7 +26,6 @@ import { TwoFactorGuard } from "../auth/guards/two-factor.guard";
 import { Resume } from "./decorators/resume.decorator";
 import { ResumeGuard } from "./guards/resume.guard";
 import { ResumeService } from "./resume.service";
-
 @ApiTags("Resume")
 @Controller("resume")
 export class ResumeController {
@@ -52,10 +51,10 @@ export class ResumeController {
     }
   }
 
-  @Post('guest')
+  @Post("guest")
   async guest_resume(@Body() createResumeDto: CreateResumeDto) {
     try {
-      const user_id = 'clwnzxoqo0000ztyob1bumhbg'
+      const user_id = await this.resumeService.getUserIdByEmail("guest@admin.com");
       return await this.resumeService.create(user_id, createResumeDto);
     } catch (error) {
       if (error instanceof PrismaClientKnownRequestError && error.code === "P2002") {
@@ -68,13 +67,11 @@ export class ResumeController {
   }
 
   @Get("/guest/:id")
-  findGuestOne(@Param("id") id: string) {
-    const user_id = 'clwnzxoqo0000ztyob1bumhbg'
-    return this.resumeService.findOne(id,user_id);
+  async findGuestOne(@Param("id") id: string) {
+    const user_id = await this.resumeService.getUserIdByEmail("guest@admin.com");
+
+    return user_id;
   }
-
-
-
 
   @Post("import")
   @UseGuards(TwoFactorGuard)

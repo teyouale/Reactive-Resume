@@ -37,9 +37,7 @@ export const routes = createRoutesFromElements(
     </Route>
 
     <Route element={<AuthLayout />}>
-      <Route element={<GuestGuard />}>
-        <Route path="/" element={<LoginPage />} />
-      </Route>
+      <Route path="/" element={<LoginPage />} />
     </Route>
 
     <Route path="auth">

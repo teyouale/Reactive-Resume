@@ -54,7 +54,7 @@ export const BasicsSection = () => {
           <Input
             id="basics.email"
             placeholder="john.doe@example.com"
-            value={basics.email === "admin@guest.com" ? undefined : basics.email}
+            value={basics.email === "guest@admin.com" ? undefined : basics.email}
             hasError={
               !basicsSchema.pick({ email: true }).safeParse({ email: basics.email }).success
             }

@@ -28,11 +28,17 @@ import { GuestBuilderLayout } from "../pages/guest/layout";
 export const routes = createRoutesFromElements(
   <Route element={<Providers />}>
     <Route element={<HomeLayout />}>
-      <Route path="/" element={<HomePage />} />
+      {/* <Route path="/" element={<HomePage />} /> */}
 
       <Route path="meta">
         <Route path="privacy-policy" element={<PrivacyPolicyPage />} />
         <Route index element={<Navigate replace to="/" />} />
+      </Route>
+    </Route>
+
+    <Route element={<AuthLayout />}>
+      <Route element={<GuestGuard />}>
+        <Route path="/" element={<LoginPage />} />
       </Route>
     </Route>
 
@@ -91,12 +97,12 @@ export const routes = createRoutesFromElements(
 
     {/* Public Routes */}
 
-     <Route path="guest">
-        <Route element={<GuestBuilderLayout />}>
-          <Route path=":id" loader={GuestbuilderLoader} element={<GuestBuilderPage />} />
+    <Route path="guest">
+      <Route element={<GuestBuilderLayout />}>
+        <Route path=":id" loader={GuestbuilderLoader} element={<GuestBuilderPage />} />
 
-          {/* <Route index element={<Navigate replace to="/dashboard/resumes" />} /> */}
-        </Route>
+        {/* <Route index element={<Navigate replace to="/dashboard/resumes" />} /> */}
+      </Route>
     </Route>
 
     <Route path=":username">
